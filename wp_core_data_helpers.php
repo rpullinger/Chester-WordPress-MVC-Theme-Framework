@@ -184,7 +184,7 @@ class ChesterWPCoreDataHelpers {
         continue;
       }
       
-      $post[$customField] = get_post_meta(get_the_ID(), ChesterWPAlchemyHelpers::$metaKeyPrefix . $customField, true);
+      $post[$customField] = get_post_meta(get_the_ID(), $customField, true);
     }
     
     return $post;
