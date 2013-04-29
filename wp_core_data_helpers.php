@@ -90,6 +90,15 @@ class ChesterWPCoreDataHelpers {
     
     return $posts;
   }
+
+  // Catch template tags
+  public function catchTemplateTag($function, $options = false){
+    
+    ob_start();
+    $options || $function();
+    !$options || $function($options);
+    return ob_get_clean();
+  }
   
   private static function getPost($dateFormat = false, $customFields = array()) {
     
