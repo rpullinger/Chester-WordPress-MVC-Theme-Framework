@@ -96,7 +96,8 @@ class ChesterWPCoreDataHelpers {
     
     ob_start();
     $options || $function();
-    !$options || $function($options);
+    !is_array($options) || call_user_func_array($function, $options);
+
     return ob_get_clean();
   }
   

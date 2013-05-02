@@ -33,12 +33,24 @@ class ChesterBaseController {
   public function renderPage($templateName, $templateVars = false) {
     echo $this->render('header', ChesterWPCoreDataHelpers::getBlogInfoData());
     wp_head();
-    echo $this->render('header_close', array(
-      'siteTitleHTML' => self::renderSiteTitle()
-    ));
+    
+
+    if (method_exists($this, 'getHeaderVars')){
+      echo $this->render('header_close', $this->getHeaderVars());
+    } else{
+      echo $this->render('header_close');
+    }
+
     echo $this->render($templateName, $templateVars);
+
     wp_footer();
-    echo $this->render('footer');
+
+    if (method_exists($this, 'getFooterVars')){
+      echo $this->render('footer', $this->getFooterVars());
+    } else{
+      echo $this->render('footer');
+    }
+
   }
 
   public static function getTemplatesFolderLocation() {
